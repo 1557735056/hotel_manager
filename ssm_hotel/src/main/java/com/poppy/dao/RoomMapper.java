@@ -1,0 +1,56 @@
+package com.poppy.dao;
+
+import com.poppy.entity.Room;
+import com.poppy.entity.vo.RoomVo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+/**
+ * @Author poppy
+ * @Date 2021/11/7 14:52
+ * @Version 1.0
+ */
+public interface RoomMapper {
+
+    /**
+     *查询房间列表
+     * @param roomVo
+     * @return
+     */
+    List<Room> findRoomListByPage(RoomVo roomVo);
+
+    /**
+     * 添加房间列表
+     * @param room
+     * @return
+     */
+    int addRoom(Room room);
+
+    /**
+     * 更新房间信息
+     * @param room
+     * @return
+     */
+    int updateRoom(Room room);
+
+    /**
+     * 删除房间信息
+     * @param id
+     * @return
+     */
+    int deleteRoom(Integer id);
+
+    /**
+     * 根据id查询房间号
+     * @param id
+     * @return
+     */
+    Room findById(Integer id);
+
+    /**
+     * 根据楼层查询
+     * @return
+     */
+    List<Room> findRoomByFloorId( );
+}

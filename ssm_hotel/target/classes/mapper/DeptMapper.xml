@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.poppy.dao.DeptMapper">
+    <resultMap id="dept" type="com.poppy.entity.Dept">
+        <id property="id" column="id"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="createDate" column="createDate"/>
+        <result property="address" column="address"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+    <select id="findDeptListByPage" resultMap="dept" >
+        select * from sys_dept
+        <where>
+            <if test="deptName!=null and deptName!=''">
+                and deptName like concat('%',#{deptName},'%')
+            </if>
+        </where>
+    </select>
+    <select id="findDeptList" resultType="com.poppy.entity.Dept">
+        select * from sys_dept;
+    </select>
+
+    <insert id="addDept">
+        insert into sys_dept(dept_name,address,createDate,remark) value(#{deptName},#{address},#{createDate},#{remark});
+    </insert>
+
+    <update id="updateDept">
+        update sys_dept
+        <set>
+            <if test="deptName != null and deptName != ''">
+                dept_name = #{deptName},
+            </if>
+            <if test="address != null and deptName != ''">
+                address = #{address},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+
+        </set>
+        where id  = ${id}
+    </update>
+
+
+    <delete id="deleteById" >
+        delete from sys_dept where id = #{id};
+    </delete>
+</mapper>
